@@ -21,5 +21,6 @@
     <x-new-arrivals/>
     <x-top-selling/>
     <x-style/>
+    <x-testimonials-section/>
     </body>
 </html>

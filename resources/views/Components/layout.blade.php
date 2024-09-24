@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>Shop.co</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -15,13 +15,7 @@
 </head>
 <body>
 
-{{--    <img src="{{Vite::asset('resources/images/heroImg.png')}}" alt="HeroImg"/>--}}
 <x-navbar/>
-<x-hero/>
-<x-companies/>
-<x-new-arrivals/>
-<x-top-selling/>
-<x-style/>
-<x-testimonials-section/>
+{{$slot}}
 </body>
 </html>

@@ -5,7 +5,7 @@
             More
         </button>
     </div>
-    <div class="flex items-center gap-2 mt-4 overflow-hidden no-scrollbar">
+    <div class="flex items-center gap-2 mt-4 overflow-scroll no-scrollbar">
         <x-testimonial/>
         <x-testimonial/>
     </div>

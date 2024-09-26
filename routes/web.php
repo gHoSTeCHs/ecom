@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\SessionController;
@@ -14,13 +15,21 @@ Route::get('/', function () {
 Route::get('/register', [RegisteredUserController::class, 'index']);
 Route::post('/register', [RegisteredUserController::class, 'create']);
 
-Route::get('/login', [SessionController::class, 'index']);
+Route::get('/login', [SessionController::class, 'index'])->name('login');
 Route::post('/login', [SessionController::class, 'create']);
 
-Route::delete('/logout', [SessionController::class,'destroy']);
+Route::delete('/logout', [SessionController::class, 'destroy']);
 
 // User Controller
 Route::get('/profile', [ProfileController::class, 'index'])->middleware('auth', 'verified');
+
+// Admin route
+Route::middleware(['role:admin'])->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'index']);
+    Route::get('/products', [\App\Http\Controllers\ProductController::class, 'index']);
+    Route::get('/products/create', [\App\Http\Controllers\ProductController::class, 'create']);
+});
+// End Admin route
 
 // Email Verification
 Route::get('/email/verify', function () {

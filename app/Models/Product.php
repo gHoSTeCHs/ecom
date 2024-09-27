@@ -15,4 +15,9 @@ class Product extends Model
     {
         return $this->hasMany(related: ProductImage::class);
     }
+
+    public function category()
+    {
+        return $this->belongsTo(related: ProductCategory::class, foreignKey: 'product_category_id');
+    }
 }

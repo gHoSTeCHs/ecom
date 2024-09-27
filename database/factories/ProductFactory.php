@@ -2,9 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\ProductCategory;
 use App\Models\ProductImage;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\Product;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Product>
@@ -21,6 +21,7 @@ class ProductFactory extends Factory
         return [
             //
             'title' => fake()->title,
+            'product_category_id' => ProductCategory::factory(),
             'price' => fake()->randomElement(array: [50, 200, 235, 946, 90, 56]),
             'description' => fake()->paragraph(),
 

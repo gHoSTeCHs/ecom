@@ -28,6 +28,7 @@ Route::middleware(['role:admin'])->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index']);
     Route::get('/products', [\App\Http\Controllers\ProductController::class, 'index']);
     Route::get('/products/create', [\App\Http\Controllers\ProductController::class, 'create']);
+    Route::get('/products/edit/{product}', [\App\Http\Controllers\ProductController::class, 'edit']);
 });
 // End Admin route
 

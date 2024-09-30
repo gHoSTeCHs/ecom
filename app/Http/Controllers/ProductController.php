@@ -21,4 +21,11 @@ class ProductController extends Controller
     {
         return view(view: 'admin.products.create');
     }
+
+    public function edit(Product $product)
+    {
+        return view(view: 'admin.products.edit', data: ['product' => $product->load('images', 'category')]);
+
+        // return response()->json(data: $product->load('images', 'category'));
+    }
 }

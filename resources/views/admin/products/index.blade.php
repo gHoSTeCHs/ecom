@@ -165,11 +165,8 @@
 
 
                                             <td class="p-4 space-x-2 whitespace-nowrap">
-                                                <button type="button" id="updateProductButton"
-                                                    data-drawer-target="drawer-update-product-default"
-                                                    data-drawer-show="drawer-update-product-default"
-                                                    aria-controls="drawer-update-product-default"
-                                                    data-drawer-placement="right"
+                                                <a type="button" id="updateProductButton"
+                                                    href="/products/edit/{{ $product->id }}"
                                                     class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
                                                     <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"
                                                         xmlns="http://www.w3.org/2000/svg">
@@ -181,7 +178,7 @@
                                                             clip-rule="evenodd"></path>
                                                     </svg>
                                                     Update
-                                                </button>
+                                                </a>
                                                 <button type="button" id="deleteProductButton"
                                                     data-drawer-target="drawer-delete-product-default"
                                                     data-drawer-show="drawer-delete-product-default"

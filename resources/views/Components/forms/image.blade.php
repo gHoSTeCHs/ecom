@@ -1,4 +1,4 @@
-@props(['name', 'label'])
+@props(['name', 'label', 'existingImages' => []])
 
 @php
     $defaults = [
@@ -8,21 +8,33 @@
         'class' => 'hidden',
         'accept' => 'image/*',
         'multiple' => true,
-    ]
+    ];
 @endphp
 
-<x-forms.field :$label :$name>
+<x-forms.field :label="$label" :name="$name">
     <div class="flex items-center justify-center w-full">
-        <label for="{{ $name }}" id="{{ $name }}-dropzone" class="flex flex-col items-center justify-center w-full h-40 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+        <label for="{{ $name }}" id="{{ $name }}-dropzone"
+            class="flex flex-col items-center justify-center w-full h-40 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
             <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                <svg aria-hidden="true" class="w-10 h-10 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
-                <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+                <svg aria-hidden="true" class="w-10 h-10 mb-3 text-gray-400" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12">
+                    </path>
+                </svg>
+                <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to
+                        upload</span> or drag and drop</p>
                 <p class="text-xs text-gray-500 dark:text-gray-400">PNG, JPG or GIF (MAX. 800x400px)</p>
             </div>
             <input {{ $attributes($defaults) }}>
         </label>
     </div>
-    <div id="{{ $name }}-preview" class="grid grid-cols-2 md:grid-cols-3 gap-4 mt-4"></div>
+
+    <div id="{{ $name }}-preview" class="grid grid-cols-2 md:grid-cols-3 gap-4 mt-4">
+        @foreach ($existingImages as $image)
+            <img src="{{ asset($image->path) }}" class="h-auto max-w-full rounded-lg" alt="Uploaded image">
+        @endforeach
+    </div>
 </x-forms.field>
 
 <script>
@@ -43,7 +55,11 @@
                 img.file = file;
 
                 const reader = new FileReader();
-                reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(img);
+                reader.onload = (function(aImg) {
+                    return function(e) {
+                        aImg.src = e.target.result;
+                    };
+                })(img);
                 reader.readAsDataURL(file);
 
                 preview.appendChild(img);
